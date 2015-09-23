@@ -10,7 +10,14 @@ var uuid = require('node-uuid')
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  User.find(function(err, users) {
+  var params = {};
+  
+  if(req.params) {
+    params = req.params;
+    delete params.token;
+  }
+  
+  User.find(params,function(err, users) {
     if (err) { return res.send(err); }
 
     return res.format({
@@ -141,7 +148,7 @@ router.delete('/:user_id', function(req, res) {
 });
 
 router.put('/:user_id', function(req, res) {
-  User.findOneAndUpdate({_id: req.params.user_id}, req.body.user, function(err, user) {
+  User.findOneAndUpdate({_id: req.params.user_id}, (req.body.user || req.body), function(err, user) {
       if (err){ console.log(err); return res.status(500).send(err); }
       
       return res.format({
@@ -172,7 +179,6 @@ router.post('/', function(req, res) {
       },
 
       json: function(){
-        console.log(user)
         return res.json(user);
       }
     });
