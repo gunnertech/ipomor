@@ -12,6 +12,8 @@ var uuid = require('node-uuid')
 router.get('/', function(req, res, next) {
   var params = {};
   
+  console.log(req.params);
+  
   if(req.params) {
     params = req.params;
     delete params.token;
