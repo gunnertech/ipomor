@@ -55,21 +55,21 @@ router.post('/:user_id/password_reset/:reset_token', function(req, res) {
         user.resetPasswordInitOn = new Date(0)
 
         user.save(function(err) {
-          if (err) { return res.status(400).end() }
+          if (err) { return res.status(400).send({}) }
 
-          return res.status(200).end();
+          return res.status(200).send({});
         });
       } else {
-        return res.status(404).end()
+        return res.status(404).send({})
       }
   });
 });
 
 router.post('/password_reset', function(req, res) {
   User.findOne({ 'email': req.body.email }, function(err, user) {
-    if (err) { return res.send(err) }
 
-    var app = req.body.app.toLowerCase()
+    var app = req.body.app || ""
+    app = app.toLowerCase()
     if (app === 'iarmor') {
       from = 'no-reply@iArmor.com'
     } else if (app === 'ipolish') {
@@ -100,13 +100,11 @@ router.post('/password_reset', function(req, res) {
     sendgrid.send(email, function(err, json) {
       if (err) {
         console.log(err)
-        return res.status(500).end()
+        return res.status(500).send({})
       }
 
-      return res.status(200).end()
+      return res.status(200).send({})
     });
-
-    return res.status(200).end()
   });
 });
 
