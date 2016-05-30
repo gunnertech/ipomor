@@ -62,7 +62,7 @@ router.post('/:user_id/password_reset/:reset_token', function(req, res) {
         user.save(function(err) {
           if (err) { return res.status(400).send({}) }
 
-          return res.status(200).send({});
+          return res.status(200).send("Your Password Has Been Changed. Please open the app and sign in");
         });
       } else {
         return res.status(404).send({})
