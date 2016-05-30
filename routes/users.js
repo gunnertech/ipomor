@@ -43,7 +43,7 @@ router.get('/:user_id/password_reset/:reset_token', function(req, res) {
       if (err) { console.log(err); }
 
       if (user && user.compareResetTokenValidity(req.params.reset_token)) {
-        return res.render('users/index', { users: users });
+        return res.render('users/forgot_password');
         // return res.redirect(user.resetPasswordFrom + "://password_reset/" + req.params.user_id + "/" + req.params.reset_token);
       } else {
         return res.status(404).send("Not Found");
