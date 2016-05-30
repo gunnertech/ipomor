@@ -45,25 +45,25 @@ app.use(methodOverride(function(req, res){
   }
 }))
 
-app.use(function(req, res, next) { 
-    var credentials = auth(req);
+// app.use(function(req, res, next) { 
+//     var credentials = auth(req);
     
-    res.format({
-      html: function(){
-        if (typeof credentials == 'undefined' || credentials['name'] != process.env.USERNAME || credentials['pass'] != process.env.PASSWORD) {
-          res.statusCode = 401;
-          res.setHeader('WWW-Authenticate', 'Basic realm="ipomor"');
-          res.end('Unauthorized');
-        } else {
-          next();
-        }
-      },
+//     res.format({
+//       html: function(){
+//         if (typeof credentials == 'undefined' || credentials['name'] != process.env.USERNAME || credentials['pass'] != process.env.PASSWORD) {
+//           res.statusCode = 401;
+//           res.setHeader('WWW-Authenticate', 'Basic realm="ipomor"');
+//           res.end('Unauthorized');
+//         } else {
+//           next();
+//         }
+//       },
 
-      json: function(){
-        next();
-      }
-    });
-});
+//       json: function(){
+//         next();
+//       }
+//     });
+// });
 
 app.use('/', routes);
 app.use('/users', users);

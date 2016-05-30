@@ -26,7 +26,7 @@ UserSchema.path('email').validate(function (value) {
 }, 'The e-mail field cannot be empty.')
 
 UserSchema.path('password').validate(function (value) {
-  return value.length >= 8;
+  return value.length >= 8; //PER TROY: FORCE PASSWORD TO BE AT LEAST 8 CHARACTERS LONG
 }, 'The password field cannot be empty and must also: be a minimum 8 characters long.')
 
 UserSchema.methods.products = function (done) {

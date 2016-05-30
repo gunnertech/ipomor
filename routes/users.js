@@ -96,7 +96,7 @@ router.post('/password_reset', function(req, res) {
         if (err) console.log(err)
       });
 
-      email.html = 'Did you forget your password? <a href="' + req.headers.host + '/users/' + user.id + '/password_reset/' + user.resetPasswordToken +  '">Click this link to reset your password</a> - Please note this link will expire in 1 hour. If you did not request this email please disregard it.'
+      email.html = 'Did you forget your password? <a href="https://' + req.headers.host + '/users/' + user.id + '/password_reset/' + user.resetPasswordToken +  '">Click this link to reset your password</a> - Please note this link will expire in 1 hour. If you did not request this email please disregard it.'
     } else {
       email.text = "We are sorry, but that email is not in our records. Perhaps you typed in the wrong email? If not, we would love to see you make an account of your own!"
     }
